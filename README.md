@@ -53,3 +53,14 @@ The list of compiled functions correspond to the one at the following [link](htt
 ```
 [1] "corr"  "KGE"   "nRMSE" "NSE"   "RE"
 ````
+
+#### Error comparison
+The execution of the analysis on my computer reported only two errors out of four reported at this [link](https://akhikolla.github.io./packages-folders/ldsr.html). The 2 errors are reported in the following table, that is the output of the variable `result$logtable`
+
+|err.kind|message|file.line|address.msg|address.trace|
+|:---|:---|:---|:----|:---|
+|UninitCondition |Conditional jump or move depends on uninitialised value(s) |utils.cpp : 37 |No Address found |No Address Trace found |
+|InvalidRead |Invalid read of size 8 |utils.cpp : 94 |Address 0x9c44d40 is 0 bytes after a block of size 320 alloc'd |NA|
+
+As you can see the 2 errors are reported in the same file, at the same line, and with the same error message. 
+
