@@ -55,12 +55,21 @@ The list of compiled functions correspond to the one at the following [link](htt
 ````
 
 #### Error comparison
-The execution of the analysis on my computer reported only two errors out of four reported at this [link](https://akhikolla.github.io./packages-folders/ldsr.html). The 2 errors are reported in the following table, that is the output of the variable `result$logtable`
+The execution of the analysis on my computer reported only three errors out of four reported at this [link](https://akhikolla.github.io./packages-folders/ldsr.html). The three errors are reported in the following table, that is the content of the variable `result$logtable`
 
 |err.kind|message|file.line|address.msg|address.trace|
 |:---|:---|:---|:----|:---|
 |UninitCondition |Conditional jump or move depends on uninitialised value(s) |utils.cpp : 37 |No Address found |No Address Trace found |
+|InvalidRead |Invalid read of size 8 |utils.cpp : 56 |Address 0xb74e050 is 0 bytes after a block of size 624 alloc'd |utils.cpp : 55 |
 |InvalidRead |Invalid read of size 8 |utils.cpp : 94 |Address 0x9c44d40 is 0 bytes after a block of size 320 alloc'd |NA|
 
-As you can see the 2 errors are reported in the same file, at the same line, and with the same error message. 
+As you can see the three errors correspond to the three provided [here](https://akhikolla.github.io./packages-folders/ldsr.html) : they occur in the same file, at the same line, and with the same error message. 
+
+#### Strange behavior
+After the first execution I only found 2 errors out of 4, so later on I decided to recompile everything with the same procedure described above. The result this time is that I was able to find 3 errors out of 4. It seems that the number of errors reported depends on some non-deterministic algorithms.
+
+The most plausible motivation relies on the fact that fuzzing is a non-deterministic process where an application is sent an invalid set of inputs to check if there are some kind of errors. 
+
+
+
 
