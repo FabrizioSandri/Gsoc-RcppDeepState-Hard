@@ -30,15 +30,17 @@ This change comes from the fact that `R.home('include')` returns the R installat
 ```
 This will result in a double concatenation of the `include` keyword. 
 
+
+#### My case example
+In my case the result of `R.home('include')` is `/usr/include/R/` which doesn't contain any include directory: in fact it's the include directory itself.
+The correct `R_HOME` directory location is correctly returned by using `R.home()` which returns in my case `/usr/lib64/R`. The latter concatenate with the `include` of line *38* is `/usr/lib64/R/include`, which is finally the correct path. 
+
+#### Solution
 The solution to the problem is to add in the Makefile two variables
 - one referring to the R home directory retrieved with the command `R.home()`
 - one referring to the include path retrieved with the command `R.home("include")`
 
 In fact by doing in this way we ensure that if the `include` directory isn't located in the R home directory the compilation process will still work. By doing in this way we avoided the use of concatenation.
-
-#### My case example
-In my case the result of `R.home('include')` is `/usr/include/R/` which doesn't contain any include directory: in fact it's the include directory itself.
-The correct `R_HOME` directory location is correctly returned by using `R.home()` which returns in my case `/usr/lib64/R`. The latter concatenate with the `include` of line *38* is `/usr/lib64/R/include`, which is finally the correct path. 
 
 ## Tests execution
 Now that the package is installed we can execute the `deepstate_harness_compile_run` to create the TestHarnesses for all the functions in the `ldsr` library. After downloading the source of [ldsr](https://cran.rstudio.com/web/packages/ldsr/index.html) from CRAN we can execute the compilation process and then analyze the results
